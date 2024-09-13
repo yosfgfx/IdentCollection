@@ -42,17 +42,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   
     // Play Button and Media Wrapper Functionality
-    const playButtons = document.querySelectorAll('.play-button');
     const mediaWrappers = document.querySelectorAll('.media-wrapper');
   
     mediaWrappers.forEach(wrapper => {
-      wrapper.addEventListener('click', (e) => {
+      wrapper.addEventListener('click', () => {
         const video = wrapper.querySelector('video');
         if (video.paused) {
           video.play();
           wrapper.classList.add('scaled');
           wrapper.querySelector('.play-button').style.display = 'none';
           overlay.style.display = 'block';
+        } else {
+          video.pause();
+          wrapper.classList.remove('scaled');
+          wrapper.querySelector('.play-button').style.display = 'block';
+          overlay.style.display = 'none';
         }
       });
     });
@@ -84,5 +88,4 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.style.display = 'none';
       });
     });
-  });
-  
+});
