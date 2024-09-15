@@ -3,44 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أعمال لهوية قناة سبأ المرئية</title>
+    <title>أعمال مختارة لهوية قناة سبأ</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            background: #000;
+            font-family: Arial, sans-serif;
         }
-        #scene-container {
+        #animated-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff00ff, #00ffff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: -1;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         #video-container {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 88%;
-            height: 88%;
-            overflow: hidden;
+            width: 80%;
+            height: 80%;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
         }
         #main-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .video-thumbnail {
+        #video-controls {
             position: absolute;
-            width: 100px;
-            height: 75px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #video-container:hover #video-controls {
+            opacity: 1;
+        }
+        button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        .thumbnail-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
+            overflow-x: auto;
+            max-width: 80%;
+        }
+        .video-thumbnail {
+            width: 100px;
+            height: 56px;
+            border-radius: 5px;
             overflow: hidden;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .video-thumbnail:hover {
+            transform: scale(1.1);
         }
         .video-thumbnail video {
             width: 100%;
@@ -50,56 +100,27 @@
     </style>
 </head>
 <body>
-    <div id="scene-container"></div>
+    <div id="animated-bg"></div>
     <div id="video-container">
-        <video id="main-video" muted></video>
+        <video id="main-video" loop>
+            لا يدعم متصفحك تشغيل الفيديو يرجى تغيير المتصفح.
+        </video>
+        <div id="video-controls">
+            <button id="play-pause">▶</button>
+            <button id="mute">🔊</button>
+        </div>
     </div>
+    <div class="thumbnail-container" id="thumbnail-container"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script>
         const videos = Array.from({ length: 16 }, (_, i) => `video${i + 1}.mp4`);
         let currentVideoIndex = 0;
         const mainVideo = document.getElementById('main-video');
-        const videoContainer = document.getElementById('video-container');
+        const playPauseBtn = document.getElementById('play-pause');
+        const muteBtn = document.getElementById('mute');
+        const thumbnailContainer = document.getElementById('thumbnail-container');
 
-        // Three.js setup
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('scene-container').appendChild(renderer.domElement);
-
-        // Create particle system
-        const particleGeometry = new THREE.BufferGeometry();
-        const particleCount = 5000;
-        const posArray = new Float32Array(particleCount * 3);
-
-        for (let i = 0; i < particleCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 5;
-        }
-
-        particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particleMaterial = new THREE.PointsMaterial({
-            size: 0.005,
-            color: 0xffffff
-        });
-
-        const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
-        scene.add(particleSystem);
-
-        camera.position.z = 2;
-
-        // Animation function
-        function animate() {
-            requestAnimationFrame(animate);
-            particleSystem.rotation.x += 0.001;
-            particleSystem.rotation.y += 0.001;
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // Video management
         function setMainVideo(src) {
             gsap.to(mainVideo, {
                 opacity: 0,
@@ -120,55 +141,57 @@
             thumbnailVideo.muted = true;
             thumbnail.appendChild(thumbnailVideo);
 
-            const angle = (index / videos.length) * Math.PI * 2;
-            const radius = 300;
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * radius;
-
-            gsap.set(thumbnail, {
-                x: x,
-                y: y,
-                scale: 0,
-                opacity: 0
-            });
-
             thumbnail.addEventListener('click', () => {
                 setMainVideo(video);
                 currentVideoIndex = index;
             });
 
-            document.body.appendChild(thumbnail);
+            thumbnailContainer.appendChild(thumbnail);
 
-            gsap.to(thumbnail, {
-                scale: 1,
-                opacity: 1,
-                duration: 1,
+            gsap.from(thumbnail, {
+                scale: 0,
+                opacity: 0,
+                duration: 0.5,
                 delay: index * 0.1,
-                ease: "elastic.out(1, 0.5)"
+                ease: "back.out(1.7)"
             });
-
-            return thumbnail;
         }
 
         videos.forEach((video, index) => createVideoThumbnail(video, index));
 
         setMainVideo(videos[0]);
 
-        // Scroll-based video switching
-        window.addEventListener('wheel', (event) => {
-            if (event.deltaY > 0) {
-                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+        playPauseBtn.addEventListener('click', () => {
+            if (mainVideo.paused) {
+                mainVideo.play();
+                playPauseBtn.textContent = '⏸';
             } else {
-                currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+                mainVideo.pause();
+                playPauseBtn.textContent = '▶';
             }
-            setMainVideo(videos[currentVideoIndex]);
+        });
+
+        muteBtn.addEventListener('click', () => {
+            mainVideo.muted = !mainVideo.muted;
+            muteBtn.textContent = mainVideo.muted ? '🔇' : '🔊';
+        });
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                playPauseBtn.click();
+            } else if (e.code === 'ArrowRight') {
+                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                setMainVideo(videos[currentVideoIndex]);
+            } else if (e.code === 'ArrowLeft') {
+                currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+                setMainVideo(videos[currentVideoIndex]);
+            }
         });
 
         // Responsive design
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            // Adjust any necessary dimensions here if needed
         });
     </script>
 </body>
