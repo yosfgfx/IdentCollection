@@ -1,106 +1,175 @@
 <!DOCTYPE html>
-<html lang="AR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>مقترح هوية بصرية لقناة سبأ</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .video-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    
-    .video-card {
-      width: calc(33.333% - 10px); /* ثلاث بطاقات في كل صف */
-      margin-bottom: 20px;
-    }
-
-    .media-wrapper {
-      position: relative;
-    }
-
-    .scaled {
-      transform: scale(1.1);
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أعمال لهوية قناة سبأ المرئية</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        #scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #video-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 88%;
+            height: 88%;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        #main-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-thumbnail {
+            position: absolute;
+            width: 100px;
+            height: 75px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .video-thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
+    <div id="scene-container"></div>
+    <div id="video-container">
+        <video id="main-video" muted></video>
+    </div>
 
-  <div class="video-gallery">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+        const videos = Array.from({ length: 16 }, (_, i) => `video${i + 1}.mp4`);
+        let currentVideoIndex = 0;
+        const mainVideo = document.getElementById('main-video');
+        const videoContainer = document.getElementById('video-container');
 
-    <!-- Video Card Template -->
-    <section class="video-card" data-number="01">
-      <div class="content">
-        <h1>مقترح ثيم لهوية قناة سبأ</h1>
-        <p>البصمة العامة للقناة هي البساطة والاعتماد على قوة الماتيريال والإضاءة والرندر</p>
-        <div class="media-wrapper">
-          <video src="video1.mp4" controls></video>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Add more video sections here as needed -->
+        // Three.js setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('scene-container').appendChild(renderer.domElement);
 
-  </div>
+        // Create particle system
+        const particleGeometry = new THREE.BufferGeometry();
+        const particleCount = 5000;
+        const posArray = new Float32Array(particleCount * 3);
 
-  <div class="overlay"></div>
+        for (let i = 0; i < particleCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 5;
+        }
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const mediaWrappers = document.querySelectorAll('.media-wrapper');
-      const overlay = document.querySelector('.overlay');
-  
-      mediaWrappers.forEach(wrapper => {
-        const video = wrapper.querySelector('video');
-        
-        wrapper.addEventListener('click', () => {
-          if (video.paused) {
-            video.play();
-            wrapper.classList.add('scaled');
-            overlay.style.display = 'block';
-          } else {
-            video.pause();
-            wrapper.classList.remove('scaled');
-            overlay.style.display = 'none';
-          }
+        particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particleMaterial = new THREE.PointsMaterial({
+            size: 0.005,
+            color: 0xffffff
         });
-      });
-  
-      // Pause Video on Overlay Click
-      overlay.addEventListener('click', () => {
-        const playingVideo = document.querySelector('video:not([paused])');
-        if (playingVideo) {
-          playingVideo.pause();
-          playingVideo.parentElement.classList.remove('scaled');
-          overlay.style.display = 'none';
+
+        const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+        scene.add(particleSystem);
+
+        camera.position.z = 2;
+
+        // Animation function
+        function animate() {
+            requestAnimationFrame(animate);
+            particleSystem.rotation.x += 0.001;
+            particleSystem.rotation.y += 0.001;
+            renderer.render(scene, camera);
         }
-      });
-  
-      // Pause Video on ESC Key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          const playingVideo = document.querySelector('video:not([paused])');
-          if (playingVideo) {
-            playingVideo.pause();
-            playingVideo.parentElement.classList.remove('scaled');
-            overlay.style.display = 'none';
-          }
+        animate();
+
+        // Video management
+        function setMainVideo(src) {
+            gsap.to(mainVideo, {
+                opacity: 0,
+                duration: 0.5,
+                onComplete: () => {
+                    mainVideo.src = src;
+                    mainVideo.play();
+                    gsap.to(mainVideo, { opacity: 1, duration: 0.5 });
+                }
+            });
         }
-      });
-    });
-  </script>
+
+        function createVideoThumbnail(video, index) {
+            const thumbnail = document.createElement('div');
+            thumbnail.classList.add('video-thumbnail');
+            const thumbnailVideo = document.createElement('video');
+            thumbnailVideo.src = video;
+            thumbnailVideo.muted = true;
+            thumbnail.appendChild(thumbnailVideo);
+
+            const angle = (index / videos.length) * Math.PI * 2;
+            const radius = 300;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+
+            gsap.set(thumbnail, {
+                x: x,
+                y: y,
+                scale: 0,
+                opacity: 0
+            });
+
+            thumbnail.addEventListener('click', () => {
+                setMainVideo(video);
+                currentVideoIndex = index;
+            });
+
+            document.body.appendChild(thumbnail);
+
+            gsap.to(thumbnail, {
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                delay: index * 0.1,
+                ease: "elastic.out(1, 0.5)"
+            });
+
+            return thumbnail;
+        }
+
+        videos.forEach((video, index) => createVideoThumbnail(video, index));
+
+        setMainVideo(videos[0]);
+
+        // Scroll-based video switching
+        window.addEventListener('wheel', (event) => {
+            if (event.deltaY > 0) {
+                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+            } else {
+                currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+            }
+            setMainVideo(videos[currentVideoIndex]);
+        });
+
+        // Responsive design
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>
