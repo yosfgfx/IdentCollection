@@ -13,25 +13,11 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Animated gradient background */
-        #animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("Background.png");
-            background-size: 100% 400%;
-            animation: gradientBG 5s ease infinite;
-            z-index: -2;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
+  background-image: url("Background.png");
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+}
         /* Logo pattern */
         #logo-pattern {
             position: fixed;
