@@ -23,7 +23,9 @@
 /* تنسيق الجسم */
 body {
   font-family: 'Alilato-ExtraLight', sans-serif;
-  background-color: #E6E9F0; /* خلفية باللون الأزرق الرمادي الفاتح */
+  background-image: url('bg.jpeg'); /* خلفية باستخدام الصورة المرفوعة */
+  background-size: cover;
+  background-position: center;
   overflow-x: hidden;
   direction: rtl;
 }
@@ -37,67 +39,31 @@ body {
 /* تنسيق بطاقة الفيديو */
 .video-card {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
+  width: 88%; /* تأكيد أن الفيديو يشغل 88% من عرض النافذة */
+  margin: 20px auto; /* مسافة بسيطة بين كل فيديو */
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #E6E9F0;
-  opacity: 0;
-  transform: translateY(100%);
-  transition: all 1s ease;
+  background: rgba(255, 255, 255, 0.8); /* خلفية نصف شفافة */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* إضافة ظل للفيديو */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
 }
 
-.video-card.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.video-card::before {
-  content: attr(data-number);
-  position: absolute;
-  font-size: 30vw;
-  color: rgba(255, 255, 255, 0.05);
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
-  font-weight: bold;
-}
-
-.content {
-  position: relative;
-  width: 88%;
-  max-width: 1200px;
-  text-align: center;
-  z-index: 1;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.content h1 {
-  font-family: 'Alexandria-Bold', sans-serif;
-  font-size: 3em;
-  margin-bottom: 0.5em;
-  color: #333;
-}
-
-.content p {
-  font-size: 1.2em;
-  margin-bottom: 1em;
-  color: #555;
+.video-card:hover {
+  transform: translateY(-5px); /* تأثير رفع خفيف عند التحويم */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* تعزيز الظل عند التحويم */
 }
 
 /* حاوية الوسائط */
 .media-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%;
+  padding-top: 56.25%; /* للحفاظ على نسبة العرض والارتفاع للفيديو */
   cursor: pointer;
-  overflow: hidden;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .media-wrapper video {
@@ -111,50 +77,11 @@ body {
 }
 
 .media-wrapper:hover video {
-  transform: scale(1.05);
+  transform: scale(1.05); /* تكبير الفيديو عند التحويم */
 }
 
 .media-wrapper.scaled video {
-  transform: scale(1.15);
-}
-
-.play-button {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  width: 80px;
-  height: 80px;
-  background: url('images/play-button.png') no-repeat center center;
-  background-size: contain;
-  transform: translate(50%, -50%);
-  cursor: pointer;
-}
-
-/* تنسيق سهم التمرير */
-.scroll-arrow {
-  position: fixed;
-  left: 30px;
-  bottom: 30px;
-  animation: bounce 2s infinite;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.scroll-arrow span {
-  font-size: 2em;
-  color: #888;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  } 
-  40% {
-    transform: translateY(-10px);
-  } 
-  60% {
-    transform: translateY(-5px);
-  }
+  transform: scale(1.15); /* تكبير أكبر عند التشغيل */
 }
 
 /* تنسيق التغطية */
@@ -167,19 +94,6 @@ body {
   display: none;
   cursor: pointer;
   z-index: 5;
-}
-
-/* أشكال هندسية في الخلفية */
-body::before {
-  content: '';
-  position: fixed;
-  top: -50px;
-  right: -50px;
-  width: calc(100% + 100px);
-  height: calc(100% + 100px);
-  background: url('images/geometric-pattern.png') repeat;
-  opacity: 0.1;
-  z-index: 0;
 }
 
 /* خطوط بيضاء رقيقة */
@@ -198,11 +112,7 @@ body::after {
 
 /* تنسيق الاستجابة */
 @media (max-width: 768px) {
-  .content h1 {
-    font-size: 2em;
-  }
-
-  .content p {
-    font-size: 1em;
+  .video-card {
+    width: 95%; /* تصغير عرض الفيديو للأجهزة الأصغر */
   }
 }
