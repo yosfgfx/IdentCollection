@@ -39,25 +39,36 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: black;
+            background-color: rgba(0, 0, 0, 0.6); /* 90% opacity */
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
+            padding: 20px 40px;
             z-index: 100;
-            padding: 20px 0;
             color: white;
+            text-align: center;
+            transition: backdrop-filter 0.5s ease;
+            backdrop-filter: blur(33px); /* Blur effect when scrolling */
+
+        }
+
+        .header.scrolled {
+            backdrop-filter: blur(33px); /* Blur effect when scrolling */
+        }
+
+        .title-container {
+            flex-grow: 1;
             text-align: center;
         }
 
-        .header h1 {
+        .title-container h1 {
             font-family: 'Alexandria-Bold', sans-serif;
             font-size: 32px;
             font-weight: bold;
             margin: 0;
         }
 
-        .header h2 {
+        .title-container h2 {
             font-family: 'Alilato-ExtraLight', sans-serif;
             font-size: 18px;
             margin-top: 24pt;
@@ -66,11 +77,9 @@
         }
 
         .logo {
-            position: absolute;
-            right: 40px;
             width: 120px;
             height: 40px;
-            background-image: url('Logo SABAtv.svg');
+            background-image: url('Logo SABAtv.svg'); /* Ensure the logo image is accessible */
             background-size: contain;
             background-repeat: no-repeat;
         }
@@ -78,7 +87,7 @@
         /* Content Section */
         .content {
             position: relative;
-            top: 180px; /* Adjusted for the larger header */
+            top: 160px;
             padding: 40px;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -207,144 +216,146 @@
 <body>
 
     <!-- Header -->
-    <div class="header">
-        <h1>أعمال مناسبة لهوية قناة سبأ</h1>
-        <h2>(Appropriate Works for the Identity of Saba TV Channel)</h2>
+    <div class="header" id="header">
+        <div class="title-container">
+            <h1>أعمال مناسبة لهوية قناة سبأ</h1>
+            <h2>(Appropriate Works for the Identity of Saba TV Channel)</h2>
+        </div>
+        <div class="logo"></div>
     </div>
 
     <!-- Content -->
     <div class="content" id="content">
         <!-- Example of video cards -->
-        <div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video1.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video2.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video3.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video4.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video5.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video6.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video7.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video8.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video9.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video10.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video11.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video12.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video13.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video14.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video15.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-<div class="movie-card">
-    <div class="movie-thumbnail">
-        <video src="video16.mp4" muted loop></video>
-        <button class="play-pause-btn">
-            <i class="material-icons">play_arrow</i>
-        </button>
-    </div>
-</div>
-
-        <!-- Continue for other videos... -->
+      
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video1.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video2.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video3.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video4.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video5.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video6.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video7.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video8.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video9.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video10.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video11.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video12.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video13.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video14.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video15.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
+      <div class="movie-card">
+          <div class="movie-thumbnail">
+              <video src="video16.mp4" muted loop></video>
+              <button class="play-pause-btn">
+                  <i class="material-icons">play_arrow</i>
+              </button>
+          </div>
+      </div>
     </div>
 
     <!-- Black overlay background -->
@@ -401,6 +412,16 @@
                 overlay.classList.remove('show');
                 expandedVideoContainer.classList.remove('show');
                 expandedVideoContainer.style.animation = 'scaleDown 0.5s forwards';
+            }
+        });
+
+        // Add blur to header on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
 
