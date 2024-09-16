@@ -88,8 +88,9 @@
         /* Style for the expanded video */
         .expanded-video {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
             width: 88vw;
             height: 88vh;
             background-color: black;
@@ -97,11 +98,34 @@
             display: none;
             justify-content: center;
             align-items: center;
+            transition: transform 0.5s ease;
+        }
+
+        .expanded-video.show {
+            display: flex;
+            transform: translate(-50%, -50%) scale(1);
         }
 
         .expanded-video video {
             width: 100%;
             height: 100%;
+        }
+
+        /* Black overlay with blur effect */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(8px);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
         }
 
         /* Play and Pause button styles */
@@ -127,23 +151,13 @@
             right: 20px;
         }
 
-        /* Animation for video scaling */
-        @keyframes scaleUp {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(0.88);
-            }
-        }
-
     </style>
 </head>
 <body>
 
     <!-- Header -->
     <div class="header">
-        <div>نماذج أعمال مناسبة لهوية قناة سبأ</div>
+        <div>أعمال مناسبة لهوية قناة سبأ</div>
         <div class="logo"></div>
     </div>
 
@@ -232,6 +246,9 @@
         </div>
     </div>
 
+    <!-- Black overlay background -->
+    <div class="overlay" id="overlay"></div>
+
     <!-- Expanded Video Section -->
     <div class="expanded-video" id="expandedVideo">
         <video id="expandedVideoElement" controls></video>
@@ -246,6 +263,7 @@
     <script>
         let expandedVideoElement = document.getElementById('expandedVideoElement');
         let expandedVideoContainer = document.getElementById('expandedVideo');
+        let overlay = document.getElementById('overlay');
         let playPauseBtn = document.getElementById('playPauseBtn');
         let closeBtn = document.getElementById('closeBtn');
 
@@ -255,7 +273,8 @@
                 expandedVideoElement.src = video.src;
                 expandedVideoElement.muted = false;
                 expandedVideoElement.play();
-                expandedVideoContainer.style.display = 'flex';
+                overlay.classList.add('show');
+                expandedVideoContainer.classList.add('show');
             });
         });
 
@@ -271,7 +290,8 @@
 
         closeBtn.addEventListener('click', function() {
             expandedVideoElement.pause();
-            expandedVideoContainer.style.display = 'none';
+            overlay.classList.remove('show');
+            expandedVideoContainer.classList.remove('show');
         });
 
         // Lazy load videos 4 by 4
