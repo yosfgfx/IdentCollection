@@ -1,28 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أعمال مناسبة لهوية قناة سبأ</title>
+    <title>أعمال مناسبة لهوية قناة سبأ (Appropriate Works for the Identity of Saba TV Channel)</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
         @font-face {
+            font-family: 'Alilato-ExtraLight';
+            src: url('Alilato-ExtraLight.woff2') format('woff2');
+        }
+
+        @font-face {
             font-family: 'Alexandria-Bold';
             src: url('Alexandria-Bold.woff2') format('woff2');
         }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Alexandria-Bold', sans-serif;
-            background-color: #141414;
-            overflow-x: hidden;
+        /* Style for Title and Subtitle */
+        .title-container {
+            text-align: center;
+            margin-top: 20px;
         }
 
-        /* Netflix-style header */
+        .title-container h1 {
+            font-family: 'Alexandria-Bold', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+            color: white;
+        }
+
+        .title-container h2 {
+            font-family: 'Alilato-ExtraLight', sans-serif;
+            font-size: 18px;
+            font-weight: normal;
+            color: lightgray;
+            margin: 0;
+        }
+
+        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -49,7 +65,7 @@
             background-repeat: no-repeat;
         }
 
-        /* Netflix-style content section */
+        /* Content Section */
         .content {
             position: relative;
             top: 80px;
@@ -85,14 +101,36 @@
             object-fit: cover;
         }
 
+        /* Center play-pause button */
+        .play-pause-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            color: gray;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .movie-card:hover .play-pause-btn {
+            display: flex;
+        }
+
         /* Style for the expanded video */
         .expanded-video {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            width: 88vw;
-            height: 88vh;
+            width: 80vw;
+            height: 80vh;
             background-color: black;
             z-index: 1000;
             display: none;
@@ -118,8 +156,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.82);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
             z-index: 999;
             display: none;
         }
@@ -128,9 +166,16 @@
             display: block;
         }
 
-        /* Play and Pause button styles */
-        .play-pause-btn, .close-btn {
+        /* Hover Play-Pause visibility */
+        .movie-card:hover .play-pause-btn {
+            display: flex;
+        }
+
+        /* Close button */
+        .close-btn {
             position: absolute;
+            top: 20px;
+            right: 20px;
             background-color: rgba(255, 255, 255, 0.7);
             border: none;
             border-radius: 50%;
@@ -141,109 +186,36 @@
             cursor: pointer;
         }
 
-        .play-pause-btn {
-            bottom: 20px;
-            left: 20px;
-        }
-
-        .close-btn {
-            top: 20px;
-            right: 20px;
-        }
-
     </style>
 </head>
 <body>
 
     <!-- Header -->
-    <div class="header">
-        <div>أعمال مناسبة لهوية قناة سبأ</div>
-        <div class="logo"></div>
+    <div class="title-container">
+        <h1>أعمال مناسبة لهوية قناة سبأ</h1>
+        <h2>(Appropriate Works for the Identity of Saba TV Channel)</h2>
     </div>
 
     <!-- Content -->
     <div class="content" id="content">
-        <!-- 16 video cards -->
+        <!-- Example of video cards -->
         <div class="movie-card">
             <div class="movie-thumbnail">
                 <video src="video1.mp4" muted loop></video>
+                <button class="play-pause-btn">
+                    <i class="material-icons">play_arrow</i>
+                </button>
             </div>
         </div>
         <div class="movie-card">
             <div class="movie-thumbnail">
                 <video src="video2.mp4" muted loop></video>
+                <button class="play-pause-btn">
+                    <i class="material-icons">play_arrow</i>
+                </button>
             </div>
         </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video3.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video4.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video5.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video6.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video7.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video8.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video9.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video10.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video11.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video12.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video13.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video14.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video15.mp4" muted loop></video>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video16.mp4" muted loop></video>
-            </div>
-        </div>
+        <!-- Continue for other videos... -->
     </div>
 
     <!-- Black overlay background -->
@@ -252,9 +224,6 @@
     <!-- Expanded Video Section -->
     <div class="expanded-video" id="expandedVideo">
         <video id="expandedVideoElement" controls></video>
-        <button class="play-pause-btn" id="playPauseBtn">
-            <i class="material-icons">play_arrow</i>
-        </button>
         <button class="close-btn" id="closeBtn">
             <i class="material-icons">close</i>
         </button>
@@ -264,28 +233,28 @@
         let expandedVideoElement = document.getElementById('expandedVideoElement');
         let expandedVideoContainer = document.getElementById('expandedVideo');
         let overlay = document.getElementById('overlay');
-        let playPauseBtn = document.getElementById('playPauseBtn');
         let closeBtn = document.getElementById('closeBtn');
 
         document.querySelectorAll('.movie-card').forEach(card => {
+            let video = card.querySelector('video');
+            let playPauseBtn = card.querySelector('.play-pause-btn');
+
+            // Hover event to show play/pause icon
+            card.addEventListener('mouseenter', () => {
+                playPauseBtn.style.display = 'flex';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                playPauseBtn.style.display = 'none';
+            });
+
             card.addEventListener('click', function() {
-                let video = this.querySelector('video');
                 expandedVideoElement.src = video.src;
                 expandedVideoElement.muted = false;
                 expandedVideoElement.play();
                 overlay.classList.add('show');
                 expandedVideoContainer.classList.add('show');
             });
-        });
-
-        playPauseBtn.addEventListener('click', function() {
-            if (expandedVideoElement.paused) {
-                expandedVideoElement.play();
-                playPauseBtn.innerHTML = '<i class="material-icons">pause</i>';
-            } else {
-                expandedVideoElement.pause();
-                playPauseBtn.innerHTML = '<i class="material-icons">play_arrow</i>';
-            }
         });
 
         closeBtn.addEventListener('click', function() {
@@ -305,6 +274,15 @@
                     }
                 }, i * 500);
             }
+        });
+
+        // Loop first 2 seconds of each video
+        document.querySelectorAll('video').forEach(video => {
+            video.addEventListener('timeupdate', function() {
+                if (this.currentTime > 2) {
+                    this.currentTime = 0;
+                }
+            });
         });
     </script>
 
