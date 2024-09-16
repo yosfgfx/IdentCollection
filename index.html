@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,26 +18,20 @@
             src: url('Alexandria-Bold.woff2') format('woff2');
         }
 
-        /* Style for Title and Subtitle */
-        .title-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .title-container h1 {
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
             font-family: 'Alexandria-Bold', sans-serif;
-            font-size: 32px;
-            font-weight: bold;
-            margin: 0;
-            color: white;
+            background: linear-gradient(120deg, #2d2d2d, #1c1c3c);
+            animation: gradient 8s ease infinite;
+            overflow-x: hidden;
         }
 
-        .title-container h2 {
-            font-family: 'Alilato-ExtraLight', sans-serif;
-            font-size: 18px;
-            font-weight: normal;
-            color: lightgray;
-            margin: 0;
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Header */
@@ -166,11 +162,6 @@
             display: block;
         }
 
-        /* Hover Play-Pause visibility */
-        .movie-card:hover .play-pause-btn {
-            display: flex;
-        }
-
         /* Close button */
         .close-btn {
             position: absolute;
@@ -186,36 +177,158 @@
             cursor: pointer;
         }
 
+        /* Keyframes for smooth scale up/down animation */
+        @keyframes scaleUp {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @keyframes scaleDown {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(0); }
+        }
+
     </style>
 </head>
 <body>
 
     <!-- Header -->
-    <div class="title-container">
-        <h1>أعمال مناسبة لهوية قناة سبأ</h1>
-        <h2>(Appropriate Works for the Identity of Saba TV Channel)</h2>
+    <div class="header">
+        <div>Large White Title Header</div>
+        <div class="logo"></div>
     </div>
 
     <!-- Content -->
     <div class="content" id="content">
         <!-- Example of video cards -->
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video1.mp4" muted loop></video>
-                <button class="play-pause-btn">
-                    <i class="material-icons">play_arrow</i>
-                </button>
-            </div>
-        </div>
-        <div class="movie-card">
-            <div class="movie-thumbnail">
-                <video src="video2.mp4" muted loop></video>
-                <button class="play-pause-btn">
-                    <i class="material-icons">play_arrow</i>
-                </button>
-            </div>
-        </div>
-        <!-- Continue for other videos... -->
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video1.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video2.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video3.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video4.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video5.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video6.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video7.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video8.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video9.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video10.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video11.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video12.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video13.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video14.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video15.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
+<div class="movie-card">
+    <div class="movie-thumbnail">
+        <video src="video16.mp4" muted loop></video>
+        <button class="play-pause-btn">
+            <i class="material-icons">play_arrow</i>
+        </button>
+    </div>
+</div>
     </div>
 
     <!-- Black overlay background -->
@@ -254,6 +367,7 @@
                 expandedVideoElement.play();
                 overlay.classList.add('show');
                 expandedVideoContainer.classList.add('show');
+                expandedVideoContainer.style.animation = 'scaleUp 0.5s forwards';
             });
         });
 
@@ -261,6 +375,17 @@
             expandedVideoElement.pause();
             overlay.classList.remove('show');
             expandedVideoContainer.classList.remove('show');
+            expandedVideoContainer.style.animation = 'scaleDown 0.5s forwards';
+        });
+
+        // Close video with 'Esc' key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                expandedVideoElement.pause();
+                overlay.classList.remove('show');
+                expandedVideoContainer.classList.remove('show');
+                expandedVideoContainer.style.animation = 'scaleDown 0.5s forwards';
+            }
         });
 
         // Lazy load videos 4 by 4
@@ -276,10 +401,10 @@
             }
         });
 
-        // Loop first 2 seconds of each video
+        // Loop first 2 seconds of each video thumbnail only
         document.querySelectorAll('video').forEach(video => {
             video.addEventListener('timeupdate', function() {
-                if (this.currentTime > 2) {
+                if (this.closest('.movie-card') && this.currentTime > 2) {
                     this.currentTime = 0;
                 }
             });
